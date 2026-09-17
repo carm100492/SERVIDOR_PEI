@@ -155,11 +155,11 @@
         <h2 style="text-align: center; margin-bottom: 20px; font-size: 18px; color: #1e293b;">Acceso Privado para Docentes</h2>
         <form onsubmit="iniciarSesion(event)">
             <div class="form-group">
-                <label for="inputUsuario">Usuario:</label>
-                <input type="text" id="inputUsuario" placeholder="Ej: docente1" required>
+                <label for="inputUsuario">USUARIO:</label>
+                <input type="text" id="inputUsuario" placeholder="Ej: tuprofecarlos" required>
             </div>
             <div class="form-group">
-                <label for="inputClave">Contraseña:</label>
+                <label for="inputClave">CONTRASEÑA:</label>
                 <input type="password" id="inputClave" placeholder="••••••••" required>
             </div>
             <button type="submit" id="btnIngresar">Ingresar a la Plataforma</button>
@@ -201,8 +201,9 @@
 </div>
 
 <script>
-    // Cambia esta URL por la dirección pública que Render asigna a tu backend
-    const URL_BACKEND = "https://tu-servidor-en-render.onrender.com";
+    // ⚠️ CAMBIA ESTA URL POR LA DIRECCIÓN EXACTA QUE TE ASIGNÓ RENDER
+    // (Asegúrate de no incluir la barra '/' al final)
+    const URL_BACKEND = "https://tu-servicio-en-render.onrender.com";
 
     // 1. INICIAR SESIÓN Y VALIDAR MEMBRESÍA
     async function iniciarSesion(e) {
@@ -231,14 +232,14 @@
                 document.getElementById('vistaLogin').style.display = 'none';
                 document.getElementById('vistaPlataforma').style.display = 'block';
 
-                // Dar formato al texto de la vigencia/licencia
+                // Formato para la vigencia de la membresía
                 const textoVigencia = data.vencimiento === "ilimitado" 
                     ? "Acceso Vitalicio (Ilimitado)" 
                     : `Licencia Activa Hasta: ${data.vencimiento}`;
 
                 document.getElementById('saludoDocente').innerHTML = `
                     <div style="font-size: 16px; font-weight: bold;">¡Bienvenido(a), ${data.nombreDocente}!</div>
-                    <div style="font-size: 13px; color: #4338ca; margin-top: 4px;">📌 Status: ${textoVigencia}</div>
+                    <div style="font-size: 13px; color: #4338ca; margin-top: 4px;">📌 Estatus: ${textoVigencia}</div>
                 `;
             } else {
                 msgError.textContent = data.mensaje;
@@ -270,7 +271,6 @@
             return;
         }
 
-        // Asignaturas disponibles por grado
         const asignaturas = ["Matematicas", "Lenguaje", "Ciencias"];
         asignaturas.forEach(asig => {
             const opt = document.createElement('option');
@@ -282,7 +282,7 @@
         selectAsignatura.disabled = false;
     }
 
-    // 3. OBTENER LISTA DE RECURSOS DESDE EL BACKEND (GITHUB)
+    // 3. OBTENER ARCHIVOS DESDE GITHUB
     async function cargarArchivos() {
         const grado = document.getElementById('selectGrado').value;
         const asignatura = document.getElementById('selectAsignatura').value;
@@ -319,14 +319,14 @@
         }
     }
 
-    // 4. ACTIVAR EL BOTÓN ABRIR
+    // 4. ACTIVAR BOTÓN DE VER RECURSO
     function activarBotonVer() {
         const selectArchivo = document.getElementById('selectArchivo');
         const btnVer = document.getElementById('btnVer');
         btnVer.disabled = !selectArchivo.value;
     }
 
-    // 5. NAVEGAR O DESCARGAR EL RECURSO SELECCIONADO
+    // 5. ABRIR O DESCARGAR RECURSO
     function mostrarRecurso() {
         const urlArchivo = document.getElementById('selectArchivo').value;
         if (urlArchivo) {
@@ -334,7 +334,7 @@
         }
     }
 
-    // 6. CERRAR SESIÓN Y REINICIAR VISTA
+    // 6. CERRAR SESIÓN
     function cerrarSesion() {
         location.reload();
     }
