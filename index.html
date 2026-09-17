@@ -58,6 +58,7 @@
             border-radius: 16px;
             border: 1px solid var(--border-color);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
         }
 
         .form-group {
@@ -109,6 +110,21 @@
             cursor: not-allowed;
         }
 
+        .btn-tutorial {
+            background-color: #ff0000;
+            color: white;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-tutorial:hover {
+            background-color: #cc0000;
+        }
+
         .btn-cerrar {
             background-color: #f1f5f9;
             color: #475569;
@@ -126,6 +142,27 @@
             border-radius: 8px;
             margin-bottom: 20px;
             color: var(--text-dark);
+        }
+
+        .guia-box {
+            background: #f1f5f9;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            border: 1px dashed #cbd5e1;
+        }
+
+        .guia-box h3 {
+            font-size: 15px;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .guia-box ol {
+            padding-left: 20px;
+            font-size: 13px;
+            color: #475569;
+            line-height: 1.6;
         }
 
         #vistaPlataforma {
@@ -150,7 +187,7 @@
         <p>Plataforma de Contenidos Académicos Multiformato</p>
     </div>
 
-    <!-- VISTA 1: INICIO DE SESIÓN -->
+    <!-- VISTA 1: INICIO DE SESIÓN Y GUÍA -->
     <div id="vistaLogin" class="card">
         <h2 style="text-align: center; margin-bottom: 20px; font-size: 18px; color: #1e293b;">Acceso Privado para Docentes</h2>
         <form onsubmit="iniciarSesion(event)">
@@ -165,9 +202,26 @@
             <button type="submit" id="btnIngresar">Ingresar a la Plataforma</button>
             <div id="msgError"></div>
         </form>
+
+        <a href="https://www.youtube.com" target="_blank" style="text-decoration: none;">
+            <button type="button" class="btn-tutorial">
+                ▶ Ver Video Tutorial en YouTube
+            </button>
+        </a>
+
+        <div class="guia-box">
+            <h3>Paso a paso para el usuario:</h3>
+            <ol>
+                <li>Ingresa tus credenciales autorizadas (usuario y contraseña).</li>
+                <li>Selecciona el <strong>Grado escolar (1° a 11°)</strong>.</li>
+                <li>Elige la <strong>Asignatura</strong> correspondiente.</li>
+                <li>Selecciona el <strong>Recurso</strong> (Archivos HTML, imágenes, PDF, audios, videos o documentos Word).</li>
+                <li>Haz clic en el botón para abrir o descargar el contenido seleccionado.</li>
+            </ol>
+        </div>
     </div>
 
-    <!-- VISTA 2: PANEL PRINCIPAL Y EXPLORADOR DE ARCHIVOS -->
+    <!-- VISTA 2: PANEL PRINCIPAL Y EXPLORADOR DE ARCHIVOS MULTIFORMATO -->
     <div id="vistaPlataforma" class="card">
         <div id="saludoDocente" class="saludo-card"></div>
         
@@ -178,6 +232,14 @@
                 <option value="Grado-1">Grado 1°</option>
                 <option value="Grado-2">Grado 2°</option>
                 <option value="Grado-3">Grado 3°</option>
+                <option value="Grado-4">Grado 4°</option>
+                <option value="Grado-5">Grado 5°</option>
+                <option value="Grado-6">Grado 6°</option>
+                <option value="Grado-7">Grado 7°</option>
+                <option value="Grado-8">Grado 8°</option>
+                <option value="Grado-9">Grado 9°</option>
+                <option value="Grado-10">Grado 10°</option>
+                <option value="Grado-11">Grado 11°</option>
             </select>
         </div>
 
@@ -189,7 +251,7 @@
         </div>
 
         <div class="form-group">
-            <label for="selectArchivo">3. Selecciona el Recurso:</label>
+            <label for="selectArchivo">3. Selecciona el Recurso (HTML, PDF, Audio, Imagen, etc.):</label>
             <select id="selectArchivo" onchange="activarBotonVer()" disabled>
                 <option value="">Elige una asignatura primero...</option>
             </select>
@@ -201,7 +263,6 @@
 </div>
 
 <script>
-    // URL activa de Render
     const URL_BACKEND = "https://backend-profe-carlos.onrender.com";
 
     // 1. INICIAR SESIÓN Y VALIDAR MEMBRESÍA
@@ -279,7 +340,7 @@
         selectAsignatura.disabled = false;
     }
 
-    // 3. OBTENER ARCHIVOS DESDE GITHUB
+    // 3. OBTENER ARCHIVOS MULTIFORMATO DESDE GITHUB
     async function cargarArchivos() {
         const grado = document.getElementById('selectGrado').value;
         const asignatura = document.getElementById('selectAsignatura').value;
@@ -303,6 +364,7 @@
             if (Array.isArray(archivos) && archivos.length > 0) {
                 archivos.forEach(file => {
                     const opt = document.createElement('option');
+                    // Almacenamos la URL de descarga/vista del recurso
                     opt.value = file.download_url;
                     opt.textContent = file.name;
                     selectArchivo.appendChild(opt);
@@ -323,7 +385,7 @@
         btnVer.disabled = !selectArchivo.value;
     }
 
-    // 5. ABRIR O DESCARGAR RECURSO
+    // 5. ABRIR RECURSO EN NUEVA PESTAÑA (SOPORTA HTML, IMÁGENES, AUDIO, PDF, ETC.)
     function mostrarRecurso() {
         const urlArchivo = document.getElementById('selectArchivo').value;
         if (urlArchivo) {
