@@ -10,168 +10,136 @@
             --primary-hover: #4338ca;
             --bg-main: #f8fafc;
             --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
             --border-color: #e2e8f0;
-            --danger: #ef4444;
+            --text-dark: #1e1b4b;
         }
 
-        * { box-sizing: border-box; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; margin: 0; padding: 0; }
-        
-        body { 
-            padding: 20px 15px; 
-            background-color: var(--bg-main); 
-            color: var(--text-main);
-            display: flex; 
-            flex-direction: column; 
-            min-height: 100vh; 
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-        .container { 
-            flex: 1; 
-            max-width: 680px; 
-            margin: 0 auto; 
-            width: 100%; 
+        body {
+            padding: 30px 15px;
+            background-color: var(--bg-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
         }
 
-        .header { 
-            text-align: center; 
-            margin-bottom: 25px; 
-            padding: 10px 0;
-        }
-        
-        .header h1 { 
-            color: #1e1b4b; 
-            font-size: 28px; 
-            font-weight: 800; 
-            letter-spacing: -0.5px; 
-        }
-        
-        .header p { 
-            color: var(--primary); 
-            font-size: 15px; 
-            font-weight: 600; 
-            margin-top: 6px; 
+        .container {
+            max-width: 650px;
+            width: 100%;
         }
 
-        .card { 
-            background: var(--card-bg); 
-            padding: 30px 25px; 
-            border-radius: 20px; 
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            color: var(--text-dark);
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 30px 25px;
+            border-radius: 16px;
             border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
 
         .form-group {
             margin-bottom: 20px;
         }
 
-        label { 
-            font-weight: 700; 
-            display: block; 
-            margin-bottom: 8px; 
-            color: #334155; 
-            font-size: 14px;
+        label {
+            font-weight: 700;
+            display: block;
+            margin-bottom: 8px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-size: 13px;
+            color: #334155;
         }
 
-        input[type="text"], input[type="password"], select { 
-            width: 100%; 
-            padding: 14px 16px; 
-            border-radius: 12px; 
-            border: 1.5px solid var(--border-color); 
-            font-size: 15px; 
-            background-color: #fff;
-            color: var(--text-main);
+        input, select {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1.5px solid var(--border-color);
+            font-size: 15px;
             outline: none;
-            transition: all 0.2s ease;
+            transition: border-color 0.2s;
         }
 
         input:focus, select:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
         }
 
-        select:disabled {
-            background-color: #f1f5f9;
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-        
-        button { 
+        button {
             width: 100%;
-            padding: 16px;
-            border-radius: 12px;
-            background-color: var(--primary); 
-            color: white; 
-            border: none; 
-            margin-top: 10px; 
-            cursor: pointer; 
-            font-size: 16px;
-            font-weight: 700; 
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+            padding: 14px;
+            border-radius: 10px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
         }
 
-        button:hover:not(:disabled) { 
-            background-color: var(--primary-hover); 
-            transform: translateY(-1px);
+        button:hover {
+            background-color: var(--primary-hover);
         }
 
-        button:disabled { 
-            background-color: #94a3b8; 
-            cursor: not-allowed; 
-            box-shadow: none;
-            opacity: 0.7;
+        button:disabled {
+            background-color: #cbd5e1;
+            cursor: not-allowed;
         }
 
-        .btn-cerrar-sesion {
+        .btn-cerrar {
             background-color: #f1f5f9;
             color: #475569;
-            box-shadow: none;
             margin-top: 15px;
-            padding: 10px;
-            font-size: 14px;
         }
 
-        .btn-cerrar-sesion:hover {
+        .btn-cerrar:hover {
             background-color: #e2e8f0;
         }
 
-        .mensaje-error {
-            color: var(--danger);
-            font-weight: 600;
-            font-size: 14px;
-            margin-top: 12px;
-            text-align: center;
+        .saludo-card {
+            background: #e0e7ff;
+            border-left: 5px solid var(--primary);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        #vistaPlataforma {
             display: none;
         }
 
-        .docente-saludo {
-            background-color: #e0e7ff;
-            color: #3730a3;
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            font-weight: 700;
+        #msgError {
+            color: #dc2626;
+            margin-top: 15px;
+            display: none;
             text-align: center;
-            font-size: 15px;
+            font-size: 14px;
+            font-weight: 600;
         }
-
-        .footer {
-            margin-top: 40px;
-            padding: 25px 15px;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        .footer strong { color: #334155; }
-        
-        #vistaPlataforma { display: none; }
     </style>
 </head>
 <body>
@@ -182,31 +150,27 @@
         <p>Plataforma de Contenidos Académicos Multiformato</p>
     </div>
 
-    <!-- SECCIÓN 1: FORMULARIO DE ACCESO -->
+    <!-- VISTA 1: INICIO DE SESIÓN -->
     <div id="vistaLogin" class="card">
-        <h2 style="text-align: center; margin-bottom: 20px; color: #1e1b4b; font-size: 20px;">Acceso Privado para Docentes</h2>
-        
+        <h2 style="text-align: center; margin-bottom: 20px; font-size: 18px; color: #1e293b;">Acceso Privado para Docentes</h2>
         <form onsubmit="iniciarSesion(event)">
             <div class="form-group">
-                <label for="inputUsuario">Usuario / Identificación:</label>
-                <input type="text" id="inputUsuario" placeholder="Ingrese su usuario" required autocomplete="username">
+                <label for="inputUsuario">Usuario:</label>
+                <input type="text" id="inputUsuario" placeholder="Ej: docente1" required>
             </div>
-
             <div class="form-group">
                 <label for="inputClave">Contraseña:</label>
-                <input type="password" id="inputClave" placeholder="Ingrese su contraseña" required autocomplete="current-password">
+                <input type="password" id="inputClave" placeholder="••••••••" required>
             </div>
-
             <button type="submit" id="btnIngresar">Ingresar a la Plataforma</button>
-            <div id="msgError" class="mensaje-error"></div>
+            <div id="msgError"></div>
         </form>
     </div>
 
-    <!-- SECCIÓN 2: PLATAFORMA PRINCIPAL -->
+    <!-- VISTA 2: PANEL PRINCIPAL Y EXPLORADOR DE ARCHIVOS -->
     <div id="vistaPlataforma" class="card">
-        <div id="saludoDocente" class="docente-saludo"></div>
-
-        <!-- PASO 1: SELECCIONAR GRADO -->
+        <div id="saludoDocente" class="saludo-card"></div>
+        
         <div class="form-group">
             <label for="selectGrado">1. Selecciona el Grado:</label>
             <select id="selectGrado" onchange="cargarAsignaturas()">
@@ -214,111 +178,74 @@
                 <option value="Grado-1">Grado 1°</option>
                 <option value="Grado-2">Grado 2°</option>
                 <option value="Grado-3">Grado 3°</option>
-                <option value="Grado-4">Grado 4°</option>
-                <option value="Grado-5">Grado 5°</option>
-                <option value="Grado-6">Grado 6°</option>
-                <option value="Grado-7">Grado 7°</option>
-                <option value="Grado-8">Grado 8°</option>
-                <option value="Grado-9">Grado 9°</option>
-                <option value="Grado-10">Grado 10°</option>
-                <option value="Grado-11">Grado 11°</option>
             </select>
         </div>
 
-        <!-- PASO 2: SELECCIONAR ASIGNATURA -->
         <div class="form-group">
             <label for="selectAsignatura">2. Selecciona la Asignatura:</label>
             <select id="selectAsignatura" onchange="cargarArchivos()" disabled>
-                <option value="">Primero elige un grado...</option>
+                <option value="">Elige un grado primero...</option>
             </select>
         </div>
 
-        <!-- PASO 3: SELECCIONAR TEMA / ARCHIVO MULTIFORMATO -->
         <div class="form-group">
-            <label for="selectArchivo">3. Selecciona el Documento o Recurso:</label>
-            <select id="selectArchivo" disabled>
-                <option value="">Primero elige una asignatura...</option>
+            <label for="selectArchivo">3. Selecciona el Recurso:</label>
+            <select id="selectArchivo" onchange="activarBotonVer()" disabled>
+                <option value="">Elige una asignatura primero...</option>
             </select>
         </div>
 
         <button id="btnVer" onclick="mostrarRecurso()" disabled>Abrir / Visualizar Recurso</button>
-        <button class="btn-cerrar-sesion" onclick="cerrarSesion()">🔒 Salir / Cerrar Sesión</button>
+        <button class="btn-cerrar" onclick="cerrarSesion()">🔒 Cerrar Sesión</button>
     </div>
-
-    <footer class="footer">
-        <p>© TU PROFE CARLOS - Todos los derechos reservados.</p>
-        <p>Esta plataforma fue desarrollada por el <strong>Ingeniero Agrícola y Profesor Carlos Andrés Romero Mendivil</strong>, egresado de la <strong>Universidad de Sucre, Colombia</strong>.</p>
-    </footer>
 </div>
 
 <script>
-    const URL_BACKEND = "https://backend-profe-carlos.onrender.com";
+    // Cambia esta URL por la dirección pública que Render asigna a tu backend
+    const URL_BACKEND = "https://tu-servidor-en-render.onrender.com";
 
-    const EXTENSIONES_SOPORTADAS = {
-        'html': '🌐 [Web Interactiva]',
-        'htm':  '🌐 [Web Interactiva]',
-        'jpg':  '🖼️ [Imagen JPG]',
-        'jpeg': '🖼️ [Imagen JPEG]',
-        'png':  '🖼️ [Imagen PNG]',
-        'gif':  '🖼️ [Imagen GIF]',
-        'svg':  '🖼️ [Vector SVG]',
-        'webp': '🖼️ [Imagen WebP]',
-        'pdf':  '📄 [Documento PDF]',
-        'doc':  '📝 [Word]',
-        'docx': '📝 [Word]',
-        'xls':  '📊 [Excel]',
-        'xlsx': '📊 [Excel]',
-        'ppt':  '📊 [PowerPoint]',
-        'pptx': '📊 [PowerPoint]',
-        'txt':  '📄 [Texto Plano]',
-        'csv':  '📊 [Archivo CSV]',
-        'zip':  '📦 [Archivo ZIP]',
-        'rar':  '📦 [Archivo RAR]',
-        'mp4':  '🎥 [Video MP4]',
-        'mp3':  '🎵 [Audio MP3]',
-        'wav':  '🎵 [Audio WAV]'
-    };
-
-    window.addEventListener('DOMContentLoaded', () => {
-        const token = sessionStorage.getItem('docente_token');
-        const nombre = sessionStorage.getItem('docente_nombre');
-
-        if (token && nombre) {
-            mostrarPlataforma(nombre);
-        }
-    });
-
-    async function iniciarSesion(event) {
-        event.preventDefault();
+    // 1. INICIAR SESIÓN Y VALIDAR MEMBRESÍA
+    async function iniciarSesion(e) {
+        e.preventDefault();
         
-        const usuario = document.getElementById('inputUsuario').value.trim();
-        const clave = document.getElementById('inputClave').value.trim();
-        const msgError = document.getElementById('msgError');
+        const usuario = document.getElementById('inputUsuario').value;
+        const clave = document.getElementById('inputClave').value;
         const btnIngresar = document.getElementById('btnIngresar');
+        const msgError = document.getElementById('msgError');
 
         msgError.style.display = 'none';
         btnIngresar.disabled = true;
-        btnIngresar.textContent = "Validando acceso...";
+        btnIngresar.textContent = "Verificando acceso...";
 
         try {
             const res = await fetch(`${URL_BACKEND}/login`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ usuario, clave })
             });
 
             const data = await res.json();
 
             if (data.exito) {
-                sessionStorage.setItem('docente_token', data.token);
-                sessionStorage.setItem('docente_nombre', data.nombreDocente);
-                mostrarPlataforma(data.nombreDocente);
+                // Ocultar formulario de login y mostrar plataforma
+                document.getElementById('vistaLogin').style.display = 'none';
+                document.getElementById('vistaPlataforma').style.display = 'block';
+
+                // Dar formato al texto de la vigencia/licencia
+                const textoVigencia = data.vencimiento === "ilimitado" 
+                    ? "Acceso Vitalicio (Ilimitado)" 
+                    : `Licencia Activa Hasta: ${data.vencimiento}`;
+
+                document.getElementById('saludoDocente').innerHTML = `
+                    <div style="font-size: 16px; font-weight: bold;">¡Bienvenido(a), ${data.nombreDocente}!</div>
+                    <div style="font-size: 13px; color: #4338ca; margin-top: 4px;">📌 Status: ${textoVigencia}</div>
+                `;
             } else {
-                msgError.textContent = data.mensaje || "Usuario o contraseña incorrectos.";
+                msgError.textContent = data.mensaje;
                 msgError.style.display = 'block';
             }
         } catch (error) {
-            msgError.textContent = "Error al conectar con el servidor de autenticación.";
+            msgError.textContent = "Error de conexión con el servidor. Intente nuevamente.";
             msgError.style.display = 'block';
         } finally {
             btnIngresar.disabled = false;
@@ -326,140 +253,91 @@
         }
     }
 
-    function mostrarPlataforma(nombreDocente) {
-        document.getElementById('vistaLogin').style.display = 'none';
-        document.getElementById('vistaPlataforma').style.display = 'block';
-        document.getElementById('saludoDocente').textContent = `Bienvenido(a), ${nombreDocente}`;
-    }
-
-    function cerrarSesion() {
-        sessionStorage.clear();
-        document.getElementById('vistaPlataforma').style.display = 'none';
-        document.getElementById('vistaLogin').style.display = 'block';
-        document.getElementById('inputUsuario').value = '';
-        document.getElementById('inputClave').value = '';
-    }
-
-    async function cargarAsignaturas() {
+    // 2. CARGAR ASIGNATURAS DE FORMA DINÁMICA
+    function cargarAsignaturas() {
         const grado = document.getElementById('selectGrado').value;
         const selectAsignatura = document.getElementById('selectAsignatura');
         const selectArchivo = document.getElementById('selectArchivo');
         const btnVer = document.getElementById('btnVer');
 
-        selectArchivo.innerHTML = '<option value="">Primero elige una asignatura...</option>';
+        selectAsignatura.innerHTML = '<option value="">-- Seleccionar Asignatura --</option>';
+        selectArchivo.innerHTML = '<option value="">Elige una asignatura primero...</option>';
         selectArchivo.disabled = true;
         btnVer.disabled = true;
 
         if (!grado) {
-            selectAsignatura.innerHTML = '<option value="">Primero elige un grado...</option>';
             selectAsignatura.disabled = true;
             return;
         }
 
-        selectAsignatura.innerHTML = '<option value="">Cargando asignaturas...</option>';
+        // Asignaturas disponibles por grado
+        const asignaturas = ["Matematicas", "Lenguaje", "Ciencias"];
+        asignaturas.forEach(asig => {
+            const opt = document.createElement('option');
+            opt.value = asig;
+            opt.textContent = asig;
+            selectAsignatura.appendChild(opt);
+        });
 
-        try {
-            const res = await fetch(`${URL_BACKEND}/listar-archivos?carpeta=${grado}`);
-            const items = await res.json();
-
-            selectAsignatura.innerHTML = '<option value="">-- Selecciona una Asignatura --</option>';
-            let contador = 0;
-            
-            items.forEach(item => {
-                if (!item.name.includes('.')) {
-                    const option = document.createElement('option');
-                    option.value = `${grado}/${item.name}`;
-                    option.textContent = item.name.replace(/_/g, ' ');
-                    selectAsignatura.appendChild(option);
-                    contador++;
-                }
-            });
-
-            if (contador === 0) {
-                selectAsignatura.innerHTML = '<option value="">No hay asignaturas registradas</option>';
-            } else {
-                selectAsignatura.disabled = false;
-            }
-        } catch (error) {
-            alert("Error al obtener asignaturas.");
-            selectAsignatura.innerHTML = '<option value="">Error al cargar</option>';
-        }
+        selectAsignatura.disabled = false;
     }
 
+    // 3. OBTENER LISTA DE RECURSOS DESDE EL BACKEND (GITHUB)
     async function cargarArchivos() {
-        const rutaAsignatura = document.getElementById('selectAsignatura').value;
+        const grado = document.getElementById('selectGrado').value;
+        const asignatura = document.getElementById('selectAsignatura').value;
         const selectArchivo = document.getElementById('selectArchivo');
         const btnVer = document.getElementById('btnVer');
 
-        if (!rutaAsignatura) {
-            selectArchivo.innerHTML = '<option value="">Primero elige una asignatura...</option>';
-            selectArchivo.disabled = true;
-            btnVer.disabled = true;
-            return;
-        }
+        selectArchivo.innerHTML = '<option value="">Cargando recursos desde GitHub...</option>';
+        selectArchivo.disabled = true;
+        btnVer.disabled = true;
 
-        selectArchivo.innerHTML = '<option value="">Cargando recursos...</option>';
+        if (!asignatura) return;
+
+        const rutaCarpeta = `${grado}/${asignatura}`;
 
         try {
-            const res = await fetch(`${URL_BACKEND}/listar-archivos?carpeta=${rutaAsignatura}`);
+            const res = await fetch(`${URL_BACKEND}/listar-archivos?carpeta=${rutaCarpeta}`);
             const archivos = await res.json();
 
-            selectArchivo.innerHTML = '<option value="">-- Selecciona un Recurso --</option>';
-            let contador = 0;
+            selectArchivo.innerHTML = '<option value="">-- Seleccionar Recurso --</option>';
 
-            archivos.forEach(archivo => {
-                const extension = archivo.name.split('.').pop().toLowerCase();
-                
-                if (EXTENSIONES_SOPORTADAS[extension]) {
-                    const option = document.createElement('option');
-                    option.value = archivo.download_url;
-                    option.dataset.ext = extension;
-                    option.textContent = `${EXTENSIONES_SOPORTADAS[extension]} ${archivo.name}`;
-                    selectArchivo.appendChild(option);
-                    contador++;
-                }
-            });
-
-            if (contador === 0) {
-                selectArchivo.innerHTML = '<option value="">No hay archivos compatibles disponibles</option>';
-                btnVer.disabled = true;
-            } else {
+            if (Array.isArray(archivos) && archivos.length > 0) {
+                archivos.forEach(file => {
+                    const opt = document.createElement('option');
+                    opt.value = file.download_url;
+                    opt.textContent = file.name;
+                    selectArchivo.appendChild(opt);
+                });
                 selectArchivo.disabled = false;
-                btnVer.disabled = false;
+            } else {
+                selectArchivo.innerHTML = '<option value="">No hay archivos en esta carpeta</option>';
             }
         } catch (error) {
-            alert("Error al obtener los recursos.");
-            selectArchivo.innerHTML = '<option value="">Error al cargar</option>';
+            selectArchivo.innerHTML = '<option value="">Error al obtener recursos</option>';
         }
     }
 
-    async function mostrarRecurso() {
+    // 4. ACTIVAR EL BOTÓN ABRIR
+    function activarBotonVer() {
         const selectArchivo = document.getElementById('selectArchivo');
-        const urlDescarga = selectArchivo.value;
-        const opcionSeleccionada = selectArchivo.options[selectArchivo.selectedIndex];
-        const extension = opcionSeleccionada.dataset.ext;
+        const btnVer = document.getElementById('btnVer');
+        btnVer.disabled = !selectArchivo.value;
+    }
 
-        if (!urlDescarga) return;
-
-        if (['html', 'htm'].includes(extension)) {
-            try {
-                const res = await fetch(urlDescarga);
-                if (!res.ok) throw new Error("No se pudo cargar el archivo HTML");
-                
-                const codigoHtml = await res.text();
-                const blob = new Blob([codigoHtml], { type: 'text/html;charset=utf-8' });
-                const blobUrl = URL.createObjectURL(blob);
-                
-                window.open(blobUrl, '_blank');
-            } catch (error) {
-                alert("Error al abrir la aplicación interactiva HTML.");
-            }
-        } else {
-            window.open(urlDescarga, '_blank');
+    // 5. NAVEGAR O DESCARGAR EL RECURSO SELECCIONADO
+    function mostrarRecurso() {
+        const urlArchivo = document.getElementById('selectArchivo').value;
+        if (urlArchivo) {
+            window.open(urlArchivo, '_blank');
         }
+    }
+
+    // 6. CERRAR SESIÓN Y REINICIAR VISTA
+    function cerrarSesion() {
+        location.reload();
     }
 </script>
-
 </body>
 </html>
- 
