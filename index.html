@@ -13,6 +13,7 @@
             --text-main: #1e293b;
             --text-muted: #64748b;
             --border-color: #e2e8f0;
+            --danger: #ef4444;
         }
 
         * { box-sizing: border-box; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; margin: 0; padding: 0; }
@@ -75,7 +76,7 @@
             letter-spacing: 0.5px;
         }
 
-        select { 
+        input[type="text"], input[type="password"], select { 
             width: 100%; 
             padding: 14px 16px; 
             border-radius: 12px; 
@@ -85,10 +86,9 @@
             color: var(--text-main);
             outline: none;
             transition: all 0.2s ease;
-            cursor: pointer;
         }
 
-        select:focus {
+        input:focus, select:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
         }
@@ -126,6 +126,39 @@
             opacity: 0.7;
         }
 
+        .btn-cerrar-sesion {
+            background-color: #f1f5f9;
+            color: #475569;
+            box-shadow: none;
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .btn-cerrar-sesion:hover {
+            background-color: #e2e8f0;
+        }
+
+        .mensaje-error {
+            color: var(--danger);
+            font-weight: 600;
+            font-size: 14px;
+            margin-top: 12px;
+            text-align: center;
+            display: none;
+        }
+
+        .docente-saludo {
+            background-color: #e0e7ff;
+            color: #3730a3;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+            font-size: 15px;
+        }
+
         .footer {
             margin-top: 40px;
             padding: 25px 15px;
@@ -137,6 +170,8 @@
         }
 
         .footer strong { color: #334155; }
+        
+        #vistaPlataforma { display: none; }
     </style>
 </head>
 <body>
@@ -147,7 +182,30 @@
         <p>Plataforma de Contenidos Académicos Multiformato</p>
     </div>
 
-    <div class="card">
+    <!-- SECCIÓN 1: FORMULARIO DE ACCESO -->
+    <div id="vistaLogin" class="card">
+        <h2 style="text-align: center; margin-bottom: 20px; color: #1e1b4b; font-size: 20px;">Acceso Privado para Docentes</h2>
+        
+        <form onsubmit="iniciarSesion(event)">
+            <div class="form-group">
+                <label for="inputUsuario">Usuario / Identificación:</label>
+                <input type="text" id="inputUsuario" placeholder="Ingrese su usuario" required autocomplete="username">
+            </div>
+
+            <div class="form-group">
+                <label for="inputClave">Contraseña:</label>
+                <input type="password" id="inputClave" placeholder="Ingrese su contraseña" required autocomplete="current-password">
+            </div>
+
+            <button type="submit" id="btnIngresar">Ingresar a la Plataforma</button>
+            <div id="msgError" class="mensaje-error"></div>
+        </form>
+    </div>
+
+    <!-- SECCIÓN 2: PLATAFORMA PRINCIPAL -->
+    <div id="vistaPlataforma" class="card">
+        <div id="saludoDocente" class="docente-saludo"></div>
+
         <!-- PASO 1: SELECCIONAR GRADO -->
         <div class="form-group">
             <label for="selectGrado">1. Selecciona el Grado:</label>
@@ -184,6 +242,7 @@
         </div>
 
         <button id="btnVer" onclick="mostrarRecurso()" disabled>Abrir / Visualizar Recurso</button>
+        <button class="btn-cerrar-sesion" onclick="cerrarSesion()">🔒 Salir / Cerrar Sesión</button>
     </div>
 
     <footer class="footer">
@@ -219,6 +278,67 @@
         'mp3':  '🎵 [Audio MP3]',
         'wav':  '🎵 [Audio WAV]'
     };
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const token = sessionStorage.getItem('docente_token');
+        const nombre = sessionStorage.getItem('docente_nombre');
+
+        if (token && nombre) {
+            mostrarPlataforma(nombre);
+        }
+    });
+
+    async function iniciarSesion(event) {
+        event.preventDefault();
+        
+        const usuario = document.getElementById('inputUsuario').value.trim();
+        const clave = document.getElementById('inputClave').value.trim();
+        const msgError = document.getElementById('msgError');
+        const btnIngresar = document.getElementById('btnIngresar');
+
+        msgError.style.display = 'none';
+        btnIngresar.disabled = true;
+        btnIngresar.textContent = "Validando acceso...";
+
+        try {
+            const res = await fetch(`${URL_BACKEND}/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ usuario, clave })
+            });
+
+            const data = await res.json();
+
+            if (data.exito) {
+                sessionStorage.setItem('docente_token', data.token);
+                sessionStorage.setItem('docente_nombre', data.nombreDocente);
+                mostrarPlataforma(data.nombreDocente);
+            } else {
+                msgError.textContent = data.mensaje || "Usuario o contraseña incorrectos.";
+                msgError.style.display = 'block';
+            }
+        } catch (error) {
+            msgError.textContent = "Error al conectar con el servidor de autenticación.";
+            msgError.style.display = 'block';
+        } finally {
+            btnIngresar.disabled = false;
+            btnIngresar.textContent = "Ingresar a la Plataforma";
+        }
+    }
+
+    function mostrarPlataforma(nombreDocente) {
+        document.getElementById('vistaLogin').style.display = 'none';
+        document.getElementById('vistaPlataforma').style.display = 'block';
+        document.getElementById('saludoDocente').textContent = `Bienvenido(a), ${nombreDocente}`;
+    }
+
+    function cerrarSesion() {
+        sessionStorage.clear();
+        document.getElementById('vistaPlataforma').style.display = 'none';
+        document.getElementById('vistaLogin').style.display = 'block';
+        document.getElementById('inputUsuario').value = '';
+        document.getElementById('inputClave').value = '';
+    }
 
     async function cargarAsignaturas() {
         const grado = document.getElementById('selectGrado').value;
@@ -321,7 +441,6 @@
 
         if (!urlDescarga) return;
 
-        // 1. ARCHIVOS HTML INTERACTIVOS: Se descargan y se abren en una pestaña nueva completa vía Blob
         if (['html', 'htm'].includes(extension)) {
             try {
                 const res = await fetch(urlDescarga);
@@ -335,8 +454,6 @@
             } catch (error) {
                 alert("Error al abrir la aplicación interactiva HTML.");
             }
-
-        // 2. OTROS ARCHIVOS (Imágenes, PDF, Word, Excel, Audio, Video, ZIP): Se abren/descargan directamente en pestaña nueva
         } else {
             window.open(urlDescarga, '_blank');
         }
