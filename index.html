@@ -201,9 +201,8 @@
 </div>
 
 <script>
-    // ⚠️ CAMBIA ESTA URL POR LA DIRECCIÓN EXACTA QUE TE ASIGNÓ RENDER
-    // (Asegúrate de no incluir la barra '/' al final)
-    const URL_BACKEND = "https://tu-servicio-en-render.onrender.com";
+    // ⚠️ COPIA Y PEGA AQUÍ LA URL EXACTA DE TU BACKEND EN RENDER (Sin '/' al final)
+    const URL_BACKEND = "https://TU-SERVICIO-EN-RENDER.onrender.com";
 
     // 1. INICIAR SESIÓN Y VALIDAR MEMBRESÍA
     async function iniciarSesion(e) {
@@ -228,11 +227,9 @@
             const data = await res.json();
 
             if (data.exito) {
-                // Ocultar formulario de login y mostrar plataforma
                 document.getElementById('vistaLogin').style.display = 'none';
                 document.getElementById('vistaPlataforma').style.display = 'block';
 
-                // Formato para la vigencia de la membresía
                 const textoVigencia = data.vencimiento === "ilimitado" 
                     ? "Acceso Vitalicio (Ilimitado)" 
                     : `Licencia Activa Hasta: ${data.vencimiento}`;
